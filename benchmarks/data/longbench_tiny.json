@@ -1,0 +1,17 @@
+[
+  {
+    "id": "longbench_tiny_1",
+    "prompt": "Context:\nThe city of Veridian Hollow is a fictional metropolis located in the heart of the Emerald Vale. Founded in 1845 by Augustus Silverpeak, it is known for its soaring clock towers and underground steam-powered transport system. The most famous landmark is the Clockwork Cathedral, which took over 40 years to build and houses the world's largest mechanical pendulum.\n\nQuestion: Who founded Veridian Hollow and in what year?",
+    "reference": ["Augustus Silverpeak, 1845"]
+  },
+  {
+    "id": "longbench_tiny_2",
+    "prompt": "Context:\nIn the year 2024, the global semiconductor industry faced a significant shift with the introduction of high-bandwidth memory v4 (HBM4). This technology utilized a 2.5D packaging architecture and reached speeds of up to 2TB/s per stack. Major players like Micron, SK Hynix, and Samsung competed for market share, with the first samples arriving in Q3. This advancement was critical for the next generation of AI training clusters, particularly for models exceeding 1 trillion parameters.\n\nQuestion: Which three companies were competing for HBM4 market share?",
+    "reference": ["Micron, SK Hynix, and Samsung"]
+  },
+  {
+    "id": "longbench_tiny_3",
+    "prompt": "Context:\nThe project 'NebulaFlux' is an open-source distributed database engine written in Rust. It implements a custom raft-consensus protocol and a log-structured-merge tree (LSM-tree) for its storage layer. The primary designer, Elena Kovic, released version 0.8.0 in January 2025, which introduced support for SIMD-accelerated secondary indexes. The project gained 15,000 stars on GitHub within its first year and is currently used by three Fortune 500 companies for real-time observability pipelines.\n\nQuestion: What storage layer structure does NebulaFlux use and who is its primary designer?",
+    "reference": ["log-structured-merge tree (LSM-tree), Elena Kovic"]
+  }
+]
