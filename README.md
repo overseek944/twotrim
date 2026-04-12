@@ -1,8 +1,5 @@
 <div align="center">
-
-<img src="https://twotrim.com/assets/images/logo.png" alt="TwoTrim Logo" width="150"/>
-
-# TwoTrim
+<img style="margin: 2rem;" src="https://www.twotrim.com/logo.svg" alt="TwoTrim Logo" width="300"/>
 
 **The Mathematical Prompt Compression Fabric for LLM APIs.**
 
