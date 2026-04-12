@@ -1,0 +1,161 @@
+# TwoTrim – Default Configuration
+# Override any setting via environment variables: TWOTRIM_<SECTION>__<KEY>
+# Example: TWOTRIM_SERVER__PORT=9000
+
+server:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 4
+  timeout_seconds: 120
+  cors_origins: ["*"]
+
+upstream:
+  # Default upstream LLM endpoint (OpenAI-compatible)
+  default_base_url: "https://api.openai.com/v1"
+  # Per-model overrides
+  routes: {}
+    # "llama-*": "http://localhost:11434/v1"    # Ollama
+    # "mistral-*": "http://localhost:8080/v1"   # vLLM
+
+compression:
+  mode: "balanced"  # lossless | balanced | aggressive
+  max_input_tokens: 128000
+  target_reduction: 0.40  # aim for 40% reduction in balanced mode
+  semantic_trigger_threshold: 4000
+
+  strategies:
+    rule_based:
+      enabled: true
+      priority: 1
+      remove_filler_words: true
+      collapse_whitespace: true
+      deduplicate_sentences: true
+      normalize_unicode: true
+
+    semantic:
+      enabled: true
+      priority: 3
+      model: "facebook/bart-large-cnn"
+      max_summary_ratio: 0.7
+      min_summary_ratio: 0.3
+      min_input_length: 500
+      batch_size: 4
+      prefer_extractive: false
+
+    embedding:
+      enabled: true
+      priority: 2
+      model: "all-MiniLM-L6-v2"
+      similarity_threshold: 0.92
+      clustering_method: "agglomerative"
+      min_cluster_size: 2
+
+    rag_aware:
+      enabled: true
+      priority: 4
+      min_relevance_score: 0.3
+      max_chunks: 10
+
+    structured:
+      enabled: true
+      priority: 5
+      prefer_json: true
+      preserve_code_blocks: true
+
+    canonicalize:
+      enabled: true
+      priority: 6
+      template_dir: null  # uses built-in templates
+
+scoring:
+  enabled: true
+  min_importance: 0.3
+  weights:
+    frequency: 0.25
+    embedding: 0.35
+    position: 0.15
+    entity: 0.25
+
+cache:
+  semantic:
+    enabled: true
+    similarity_threshold: 0.92
+    max_entries: 10000
+    ttl_seconds: 3600
+    embedding_model: "all-MiniLM-L6-v2"
+
+  prompt:
+    enabled: true
+    backend: "sqlite"  # sqlite | redis
+    db_path: ".twotrim/prompt_cache.db"
+    max_entries: 50000
+
+  memory:
+    enabled: true
+    max_sessions: 1000
+    compress_after_turns: 5
+
+  store:
+    enabled: true
+    backend: "sqlite"
+    db_path: ".twotrim/context_store.db"
+
+policy:
+  default_mode: "balanced"
+  auto_adjust: true
+  max_degradation: 0.05  # max 5% quality drop
+  per_model: {}
+  # per_model:
+  #   "gpt-4*": {mode: "balanced", max_degradation: 0.03}
+  #   "gpt-3.5*": {mode: "aggressive", max_degradation: 0.10}
+  #   "llama-*": {mode: "aggressive"}
+
+evaluation:
+  enabled: true
+  sample_rate: 0.1  # evaluate 10% of requests
+  similarity_threshold: 0.90
+  store_results: true
+  results_path: ".twotrim/eval_results.jsonl"
+
+kv_cache:
+  enabled: false  # enable for open-weight model deployments
+  quantization:
+    enabled: false
+    bits: 8
+  eviction:
+    strategy: "lru"  # lru | attention_score | hybrid
+    max_tokens: 4096
+  token_pruning:
+    enabled: false
+    min_attention: 0.01
+  token_merging:
+    enabled: false
+    similarity_threshold: 0.95
+
+response:
+  compress: true
+  remove_verbosity: true
+  enforce_structured: false
+  max_output_tokens: null
+
+observability:
+  prometheus:
+    enabled: true
+    port: null  # served on same port as proxy
+  logging:
+    level: "INFO"
+    format: "json"  # json | text
+    file: null  # null = stderr only
+  request_logging:
+    enabled: true
+    log_prompts: false  # privacy: don't log prompt content by default
+
+plugins:
+  enabled: true
+  dirs: []  # additional plugin directories
+
+models:
+  embedding: "all-MiniLM-L6-v2"
+  summarization: "facebook/bart-large-cnn"
+  device: "auto"  # auto | cpu | cuda
+  cache_dir: null  # null = default HF cache
