@@ -120,6 +120,7 @@ To prove the math works, here is how TwoTrim performs dynamically on established
 | **2WikiMQA** *(RAG)* | **74% (Cost Saved)** | 0.13 | 0.04 | 🟡 Semantic Limits |
 | **Musique** *(Extreme RAG)* | **87% (Cost Saved)** | 0.10 | 0.02 | 🔴 Context Break |
 | **RULER** *(Needle-in-Haystack)* | **99.5% (Cost Saved)** | 0.50 | **0.50** | 🟢 100% Retained |
+
 *> Note: On datasets like `HotpotQA` and `Extreme RULER`, TwoTrim successfully deletes up to 99.5% of the text while maintaining a flawless 100% accuracy retention compared to the baseline. On `PassageCount`, compressing the text actually forced the LLM into a higher accuracy tier! (Extreme multi-hop datasets like Musique naturally drop in accuracy at ~87% compression, highlighting the boundary of current semantic limits).*
 
 *You can manually replicate our live benchmark validations anytime by running `python benchmarks/runner.py --limit 10` on your laptop.*
