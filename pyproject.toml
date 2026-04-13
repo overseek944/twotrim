@@ -8,7 +8,7 @@ version = "0.1.1"
 description = "Universal token compression fabric for LLM applications"
 readme = "README.md"
 license = {text = "Apache-2.0"}
-requires-python = ">=3.11,<3.13"
+requires-python = ">=3.11"
 authors = [
     {name = "TwoTrim Contributors"},
 ]
@@ -20,52 +20,53 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3 :: Only",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
 dependencies = [
-    "fastapi>=0.110.0",
-    "uvicorn[standard]>=0.27.0",
-    "httpx>=0.27.0",
-    "pydantic>=2.0",
-    "pydantic-settings>=2.0",
-    "tiktoken>=0.7.0",
-    "tokenizers>=0.19.0",
-    "sentence-transformers>=3.0.0",
-    "faiss-cpu>=1.8.0",
-    "transformers>=4.40.0",
-    "torch>=2.2.0",
-    "numpy>=1.26.0",
-    "scikit-learn>=1.4.0",
-    "prometheus-client>=0.20.0",
-    "click>=8.1.0",
-    "pyyaml>=6.0",
-    "structlog>=24.1.0",
-    "openai>=1.30.0",
-    "aiosqlite>=0.20.0",
-    "xxhash>=3.4.0",
-    "regex>=2024.4.0",
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "httpx>=0.28.0",
+    "pydantic>=2.10.0",
+    "pydantic-settings>=2.7.0",
+    "tiktoken>=0.9.0",
+    "tokenizers>=0.21.0",
+    "sentence-transformers>=3.3.0",
+    "faiss-cpu>=1.9.0",
+    "transformers>=4.48.0",
+    "torch>=2.5.0",
+    "numpy>=2.0.0",
+    "scikit-learn>=1.6.0",
+    "prometheus-client>=0.21.0",
+    "click>=8.1.8",
+    "pyyaml>=6.0.2",
+    "structlog>=25.1.0",
+    "openai>=1.55.0",
+    "aiosqlite>=0.21.0",
+    "xxhash>=3.5.0",
+    "regex>=2024.11.0",
 ]
 
 [project.optional-dependencies]
 gpu = [
-    "torch>=2.2.0",
+    "torch>=2.5.0",
 ]
 redis = [
-    "redis[hiredis]>=5.0.0",
+    "redis[hiredis]>=5.2.0",
 ]
 vllm = [
-    "vllm>=0.4.0",
+    "vllm>=0.6.0",
 ]
 dev = [
-    "pytest>=8.0.0",
-    "pytest-asyncio>=0.23.0",
-    "pytest-cov>=5.0.0",
-    "pytest-httpx>=0.30.0",
-    "ruff>=0.4.0",
-    "mypy>=1.10.0",
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "pytest-cov>=6.0.0",
+    "pytest-httpx>=0.35.0",
+    "ruff>=0.8.0",
+    "mypy>=1.13.0",
 ]
 evaluate = [
-    "datasets>=2.14.0,<2.20.0",
+    "datasets>=3.0.0",
     "evaluate>=0.4.0",
     "rouge_score>=0.1.2",
 ]
@@ -76,7 +77,7 @@ twotrim = "twotrim.cli.main:cli"
 [project.urls]
 Homepage = "https://github.com/overseek944/twotrim"
 Repository = "https://github.com/overseek944/twotrim"
-Documentation = "https://github.com/overseek944/twotrim/tree/main/docs"
+Documentation = "https://github.com/overseek944/twotrim#readme"
 Issues = "https://github.com/overseek944/twotrim/issues"
 
 [tool.hatch.build.targets.wheel]

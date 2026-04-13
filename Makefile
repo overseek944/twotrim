@@ -10,7 +10,7 @@ test:
 	pytest tests/ -v --tb=short
 
 test-cov:
-	pytest tests/ -v --cov=tokenforge --cov-report=term-missing
+	pytest tests/ -v --cov=twotrim --cov-report=term-missing
 
 lint:
 	ruff check src/ tests/
@@ -21,12 +21,12 @@ format:
 	ruff format src/ tests/
 
 type-check:
-	mypy src/tokenforge/
+	mypy src/twotrim/
 
 serve:
-	tokenforge serve --config config.yaml
+	twotrim serve --config config.yaml
 
 clean:
-	rm -rf .tokenforge/ dist/ build/ *.egg-info
+	rm -rf .twotrim/ dist/ build/ *.egg-info
 	find . -type d -name __pycache__ -exec rm -rf {} +
 	find . -type f -name "*.pyc" -delete

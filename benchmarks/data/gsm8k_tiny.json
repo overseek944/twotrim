@@ -1,27 +1,5 @@
-[
-  {
-    "id": "gsm8k_tiny_1",
-    "prompt": "Janet’s ducks lay 16 eggs per day. She eats 3 for breakfast every morning and bakes muffins for her friends that use 4 eggs every day. She sells the remainder for $2 per egg at the farmers' market. How much money does she make every day?",
-    "reference": "18"
-  },
-  {
-    "id": "gsm8k_tiny_2",
-    "prompt": "Angelo and Abbie went orchid hunting. Angelo found 15 orchids while Abbie found 10 more than Angelo. Together, how many orchids did they find?",
-    "reference": "40"
-  },
-  {
-    "id": "gsm8k_tiny_3",
-    "prompt": "Bella bought a set of 100 beads. She used 20% of the beads to make a necklace and 10% of the remaining beads to make a bracelet. How many beads does she have left?",
-    "reference": "72"
-  },
-  {
-    "id": "gsm8k_tiny_4",
-    "prompt": "Aia has 15 apples. She gives 5 to her sister and 3 to her brother. She then buys 7 more. How many apples does she have now?",
-    "reference": "14"
-  },
-  {
-    "id": "gsm8k_tiny_5",
-    "prompt": "If a farmer has 12 sheep and 8 chickens, how many legs do all the animals have in total?",
-    "reference": "64"
-  }
-]
+{"id": "gsm8k_tiny_1", "prompt": "Janet's ducks lay 16 eggs per day. She eats 3 for breakfast every morning and bakes muffins for her friends that use 4 eggs every day. She sells the remainder for $2 per egg at the farmers' market. How much money does she make every day?", "reference": "18"}
+{"id": "gsm8k_tiny_2", "prompt": "Angelo and Abbie went orchid hunting. Angelo found 15 orchids while Abbie found 10 more than Angelo. Together, how many orchids did they find?", "reference": "40"}
+{"id": "gsm8k_tiny_3", "prompt": "Bella bought a set of 100 beads. She used 20% of the beads to make a necklace and 10% of the remaining beads to make a bracelet. How many beads does she have left?", "reference": "72"}
+{"id": "gsm8k_tiny_4", "prompt": "Aia has 15 apples. She gives 5 to her sister and 3 to her brother. She then buys 7 more. How many apples does she have now?", "reference": "14"}
+{"id": "gsm8k_tiny_5", "prompt": "If a farmer has 12 sheep and 8 chickens, how many legs do all the animals have in total?", "reference": "64"}

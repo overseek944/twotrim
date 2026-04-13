@@ -141,7 +141,7 @@ def main():
     results = []
 
     # Find all JSONL files
-    files = list(data_dir.glob("*.jsonl"))
+    files = sorted(list(data_dir.glob("*.jsonl")) + list(data_dir.glob("*.json")))
     print(f"Found {len(files)} datasets in {data_dir}")
 
     for file in files:

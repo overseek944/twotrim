@@ -12,7 +12,10 @@ import logging
 import time
 import uuid
 from contextlib import asynccontextmanager
+from importlib.metadata import version as _get_version
 from typing import Any
+
+_PKG_VERSION = _get_version("twotrim")
 
 import httpx
 from fastapi import FastAPI, Header, Request
@@ -58,7 +61,7 @@ def create_app(config_path: str | None = None) -> FastAPI:
     app = FastAPI(
         title="TwoTrim",
         description="Universal Token Compression Fabric for LLM Applications",
-        version="0.1.0",
+        version=_PKG_VERSION,
         lifespan=lifespan,
     )
 
@@ -76,7 +79,7 @@ def create_app(config_path: str | None = None) -> FastAPI:
 
     @app.get("/health")
     async def health():
-        return {"status": "ok", "version": "0.1.0"}
+        return {"status": "ok", "version": _PKG_VERSION}
 
     @app.get("/v1/models")
     async def list_models():

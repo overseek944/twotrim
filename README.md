@@ -4,15 +4,14 @@
 **The Mathematical Prompt Compression Fabric for LLM APIs.**
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Python Version](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/)
-[![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen.svg)]()
+[![Python Version](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org/)
 [![Code Style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 [Website](https://twotrim.com) • [Benchmarks](#benchmarks) • [Quick Start](#quick-start) • [How it Works](#how-it-works)
 
 </div>
 
-TwoTrim is an ultra-lightweight, mathematically robust prompt compression middleware. It sits between your application and Large Language Models (like OpenAI or Anthropic) to **reduce your token consumption by up to 80% without degrading response accuracy.**
+TwoTrim is an ultra-lightweight, mathematically robust prompt compression middleware. It sits between your application and Large Language Models (like OpenAI or Anthropic) to **reduce your token consumption by up to 65% without degrading response accuracy.**
 
 By employing LongLLMLingua-inspired extractive strategies, Sentence Transformer semantic scoring, and "Lost-in-the-Middle" document reordering, TwoTrim acts as a reverse proxy that dissects giant context windows down to their absolute minimal factual necessity.
 
@@ -82,8 +81,10 @@ TwoTrim natively speaks the standard OpenAI JSON format. To instantly compress p
 You can control exactly how aggressive the math is by passing `compression_mode` to your requests. 
 
 1. **`lossless` (The Cleaner):** Zero knowledge deletion. Purely strips wasteful formatting, excessive whitespace, and duplicate JSON keys. 
-2. **`balanced` (The Gold Standard):** Uses semantic transformers to detect and delete conversational filler and redundant sentences that the LLM doesn't actually need to answer your core question. Aims for a safe **50% cost savings**.
-3. **`aggressive` (The Eraser):** Forces a staggering **80%-90% token reduction**. It mathematically forces the most critical facts to the very start and end of the prompt window, deleting the entire "middle" of the document. Perfect for summarizing 100-page meeting transcripts.
+2. **`balanced` (The Gold Standard):** Uses semantic transformers to detect and delete conversational filler and redundant sentences that the LLM doesn't actually need to answer your core question. Aims for a safe **~40% cost reduction**.
+3. **`aggressive` (The Eraser):** Forces up to **~65% token reduction**. It mathematically forces the most critical facts to the very start and end of the prompt window, deleting the entire "middle" of the document. Perfect for summarizing 100-page meeting transcripts.
+
+> **Note for RAG and QA workflows:** When a user query is present in the prompt, TwoTrim automatically uses extractive-only compression (sentence scoring + reordering) rather than abstractive summarization. This is intentional — it prevents hallucination on factual question-answering tasks. Expect ~20–40% reduction on RAG prompts in balanced mode vs. 40–65% on free-form context without a query.
 
 ---
 
@@ -114,13 +115,13 @@ Prompt compression is a growing field. Here is where TwoTrim sits against 7 real
 | **CPC** | Academic (2024) | ~80% | ~92% | Yes |
 | **TwoTrim** | **Open Source (2026)** | **~65%** | **~95%** | **No** |
 
-*Sources: LLMLingua-2 (Pan et al., 2024), LongLLMLingua (Jiang et al., 2024), RECOMP (Xu et al., 2023), PCRL (Jung & Kim, 2024). TwoTrim numbers from our own LongBench run (n=10, `balanced` mode).*
+*Sources: LLMLingua-2 (Pan et al., 2024), LongLLMLingua (Jiang et al., 2024), RECOMP (Xu et al., 2023), PCRL (Jung & Kim, 2024). TwoTrim numbers from our internal evaluation run using the full HuggingFace datasets (download via `python scripts/download_benchmarks.py`). The included `benchmarks/data/` files are smoke-test samples only.*
 
 ---
 
 ## 📈 TwoTrim Benchmark Results
 
-Every number below is from a real `--limit 10` run across 20+ LongBench datasets using `gpt-4o-mini`. No cherry-picking.
+Results below are from evaluation runs using `gpt-4o-mini` against the full HuggingFace datasets. To reproduce locally, first download the datasets (`python scripts/download_benchmarks.py`), then run: `PYTHONPATH="." python benchmarks/runner.py --limit 10`
 
 <div align="center">
 <img src="./assets/twotrim_benchmarks.png" alt="TwoTrim Benchmarks" width="850"/>
