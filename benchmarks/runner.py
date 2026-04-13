@@ -123,7 +123,7 @@ def main():
     parser = argparse.ArgumentParser(description="TwoTrim Benchmark Runner")
     parser.add_argument("--data-path", type=str, default="benchmarks/data", help="Directory containing JSONL files")
     parser.add_argument("--limit", type=int, default=10, help="Samples per dataset")
-    parser.add_argument("--mode", type=str, default="baseline,semantic", help="Comma-separated modes (baseline, semantic, etc)")
+    parser.add_argument("--mode", type=str, default="baseline,balanced", help="Comma-separated modes (baseline, balanced, etc)")
     parser.add_argument("--model", type=str, default="gpt-4o-mini")
     parser.add_argument("--mock", action="store_true", help="Run with mock predictions for verification")
     args = parser.parse_args()
