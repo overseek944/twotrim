@@ -99,8 +99,20 @@ class ManualDataset:
             # Some datasets have "context" and "input", others just "input" (full prompt)
             context = item.get("context")
             question = item.get("input") or item.get("question")
-            reference = item.get("answers") or item.get("answer") or item.get("output")
-            
+            reference = item.get("answers") or item.get("answer") or item.get("output") or item.get("reference")
+
+            # Handle pre-normalized format (prompt + reference keys) used by sample/smoke-test files
+            if not context and not question and item.get("prompt"):
+                if not reference:
+                    return None
+                if not isinstance(reference, list):
+                    reference = [reference]
+                return {
+                    "id": item.get("id", f"{dataset_type}_manual_{len(item)}"),
+                    "prompt": item["prompt"],
+                    "reference": reference,
+                }
+
             if not reference: return None
             
             # Determine the dataset sub-type for appropriate prompting
